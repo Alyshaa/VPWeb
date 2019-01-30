@@ -10,6 +10,6 @@ Kinderleichtes bedienen des Editors
 
 Erstellen und löschen von einträgen
 
-Informationen zu Enträgen wie Ersellungszeit/datum und annmerkungen
+Informationen zu Enträgen wie Ersellungszeit/datum und anmerkungen
 
 Die gesammte oberfläche ist barrjehrefrei und mit jedem Browser und Sreanreader verwendbar

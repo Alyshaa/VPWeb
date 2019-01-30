@@ -30,8 +30,7 @@ foreach ($pdo->query($sql)as $row) {
     echo "<td>". $row['vertretung'] . "</td>";
     echo "<td>". $row['anmerkung'] . "</td>";
     echo "<td>". $row['hinzugefuegt'] . "</td>";
-//    echo '<td><a href="delete.php?id=' . $row['id'] . '">Löschen</a></td>';
-    echo '<td><a>FICKT EUCH IHR HUSOS</a></td>';
+    echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
     echo "</tr>";
 }
 
@@ -41,7 +40,7 @@ echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
-echo "<td><a href=\"New.php\"> - Füge eintrag hinzu - </a></td>";
+echo "<td><a href=\"New.php\">Neuer Eintrag</a></td>";
 
 ?>
 </body>

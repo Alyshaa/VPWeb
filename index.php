@@ -16,8 +16,9 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 //$statement->execute(array('10', '20', '30', '40'));
 
 echo "Fehlende Kollegen:";
+$fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
 echo"</br>";
-
+echo $fehlende_kollegen;
 echo '<table border="1">';
 
 echo "<td> Stunde </td>";

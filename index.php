@@ -24,13 +24,16 @@ echo "<td> Stunde </td>";
 echo "<td> Klasse </td>";
 echo "<td> Vertretung </td>";
 echo "<td> Fach </td>";
-$sql = "SELECT stunde, klasse, vertretung FROM plan ORDER BY Klasse";
+$sql = "SELECT stunde, klasse, vertretung, fach FROM plan ORDER BY Klasse";
 foreach ($pdo->query($sql) as $row) {
     echo "<tr>";
+    echo "<td>". $row['stunde'] . "</td>";
     echo "<td>". $row['klasse'] . "</td>";
     echo "<td>". $row['vertretung'] . "</td>";
+    echo "<td>". $row['fach'] . "</td>";
     echo "</tr>";
 }
+echo"</br>";
 echo '<a href="Editor.php">Vertretungsplan bearbeiten</a>';
 
 ?>

@@ -6,15 +6,19 @@
     <body>
     <form action="" method="post">
         <div>
-            <form action="" method="post">
+            <label>Stunde:
+                <input type="text" name="stunde" id="stunde">
+            </label>
             <label>Klasse:
-                <input type="text" name="vorname" id="vorname">
+                <input type="text" name="klasse" id="klasse">
             </label>
             <label>Vertretung:
-                <input type="text" name="nachname" id="nachname">
+                <input type="text" name="vertretung" id="vertretung">
+            </label>
+            <label>Anmerkung:
+                <input type="text" name="anmerkung" id="anmerkung">
             </label>
             <input type="submit"  name="submit"  value="speichern">
-    </form>
         </div>
     </form>
     </body>
@@ -27,8 +31,16 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 if (isset($_POST['submit']))
 
 {
-    $statement = $pdo->prepare("INSERT INTO plan (id, Klasse, Vertretung) VALUES (?, ?, ?)");
-    $statement->execute(array('', '1', '30'));
+    //$statement = $pdo->prepare("INSERT INTO plan (id, stunde, klasse, vertretung, annmerkung) VALUES (?, ?, ?;?,?)");
+    //$statement->execute(array('', '1', '8', 'Mathematik mit frau x', 'Könnte sich noch ändern'));
+
+    $stunde = trim($_POST['Stunde']);
+    $klasse = trim($_POST['klasse']);
+    $vertretung = trim($_POST['vertretung']);
+    $anmerkung = trim($_POST['anmerkung']);
+
+    $statement = $pdo->prepare("INSERT INTO plan (stunde, klasse, vertretung, anmerkung) VALUES (:name, :email, :text)");
+    $result = $statement->execute(array('stunde' => $stunde, 'klasse' => $klasse, 'vertretung' => $vertretung, 'anmerkung' => $anmerkung));
 
         header("Location: editor.php");
     }
@@ -37,4 +49,8 @@ else
 {
     //header("Location: new.php");
 }
+
+
+
+
 ?>

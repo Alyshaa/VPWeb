@@ -29,25 +29,12 @@
 $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 if (isset($_POST['submit']))
-
 {
-    //$statement = $pdo->prepare("INSERT INTO plan (id, stunde, klasse, vertretung, annmerkung) VALUES (?, ?, ?;?,?)");
-    //$statement->execute(array('', '1', '8', 'Mathematik mit frau x', 'Könnte sich noch ändern'));
 
-    $stunde = trim($_POST['Stunde']);
-    $klasse = trim($_POST['klasse']);
-    $vertretung = trim($_POST['vertretung']);
-    $anmerkung = trim($_POST['anmerkung']);
-
-    $statement = $pdo->prepare("INSERT INTO plan (stunde, klasse, vertretung, anmerkung) VALUES (:name, :email, :text)");
-    $result = $statement->execute(array('stunde' => $stunde, 'klasse' => $klasse, 'vertretung' => $vertretung, 'anmerkung' => $anmerkung));
-
-        header("Location: editor.php");
-    }
-
+}
 else
 {
-    //header("Location: new.php");
+
 }
 
 

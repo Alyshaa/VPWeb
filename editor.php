@@ -18,20 +18,24 @@ echo "<td> Stunde </td>";
 echo "<td> Klasse </td>";
 echo "<td> vertretung </td>";
 echo "<td> Anmerkung </td>";
+echo "<td> hinzugefügt </td>";
 
 $sql = "SELECT * FROM plan ORDER BY id";
                         //->fetchALL(PDO::FETCH_ASSOC)
-foreach ($pdo->query($sql) as $row) {
+foreach ($pdo->query($sql)as $row) {
     echo "<tr>";
     echo "<td>". $row['id'] . "</td>";
     echo "<td>". $row['stunde'] . "</td>";
     echo "<td>". $row['klasse'] . "</td>";
     echo "<td>". $row['vertretung'] . "</td>";
     echo "<td>". $row['anmerkung'] . "</td>";
-    echo '<td><a href="delete.php?id=' . $row['id'] . '">Löschen</a></td>';
+    echo "<td>". $row['hinzugefuegt'] . "</td>";
+//    echo '<td><a href="delete.php?id=' . $row['id'] . '">Löschen</a></td>';
+    echo '<td><a>FICKT EUCH IHR HUSOS</a></td>';
     echo "</tr>";
 }
 
+echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";
 echo "<td></td>";

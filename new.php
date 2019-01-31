@@ -25,7 +25,11 @@
 </html>
 
 <?php
+session_start();
+if(!isset($_SESSION['loggedin'])){
+  header('Location: index.php');
 
+}
 $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 if (isset($_POST['submit']))

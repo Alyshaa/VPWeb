@@ -5,10 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vertretungsplan Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+      function changePW(password, password2, operation){
+        if(password === password2){
+          fetch('php/LoginHandling.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            paswd: password,
+            operation: operation
+          })
+        }).then(response=>response.text())
+          .then(data=>{
+            if (data == 'true') {
+              window.location.replace('index.php');
+            }
+            console.log(data);
+        });
 
+      }else{
+        console.log('sdf');
+      }
+      }
+
+
+    </script>
 </head>
 <body>
 <?php
+session_start();
+if(!isset($_SESSION['loggedin'])){
+  header('Location: index.php');
+
+}
 $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 echo '<table border = "1">';
@@ -39,6 +70,7 @@ echo '<td></td>';
 echo '<td></td>';
 echo '<td></td>';
 echo '<td><a href="New.php">Neuer Eintrag</a></td>';
+echo '</table>';
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
 
 ?>
@@ -48,6 +80,14 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
 <form method='post'>
     <input type='text' id='fehlendekollegen' value='<?php echo $fehlende_kollegen; ?>'>
     <input type='submit' name='kspeichern' value='speichern' action='?submit'>
+</form>
+<br>
+<a>Passwort Ändern</a>
+<br>
+<form>
+    <input type='password' id='cpw' value='' placeholder="Passwort">
+    <input type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
+    <button type='button' onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')" >speichern</button>
 </form>
 
 <?php

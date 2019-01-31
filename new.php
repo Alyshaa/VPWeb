@@ -4,7 +4,7 @@
         <title>Neuer Eintrag</title>
     </head>
     <body>
-    <form action="" method="post">
+    <form action="php/EintragSpeichern.php" method="get">
         <div>
             <label>Stunde:
                 <input type="text" name="stunde" id="stunde">
@@ -24,24 +24,4 @@
     </body>
 </html>
 
-<?php
-session_start();
-if(!isset($_SESSION['loggedin'])){
-  header('Location: index.php');
 
-}
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
-
-if (isset($_POST['submit']))
-{
-
-}
-else
-{
-
-}
-
-
-
-
-?>

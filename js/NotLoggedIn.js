@@ -1,10 +1,11 @@
+
 onload = e =>{
   var body = document.querySelector('body');
   var loginWraper = document.createElement('div');
+  var inputWraper = document.createElement('div');
+  inputWraper.className='inputWraper';
   loginWraper.className='loginWraper';
-  var notification =  document.createElement('h1');
-  notification.innerText = 'You are not logged in';
-  loginWraper.append(notification);
+  
 
   var login = document.createElement('button');
   login.innerText = 'Login';
@@ -12,14 +13,20 @@ onload = e =>{
     MakeLogin();
   }
 
-  loginWraper.append(login);
+  inputWraper.append(login);
+
+  loginWraper.append(inputWraper);
   body.append(loginWraper);
 }
 
 function MakeLogin() {
   var body = document.querySelector('body');
   var loginWraper = document.querySelector('.loginWraper');
+  var inputWraper = document.querySelector('.inputWraper');
+  inputWraper.innerHTML = '';
   var form, inPW, sub, errorWraper;
+
+
 
   //Password Input
   {
@@ -35,7 +42,7 @@ function MakeLogin() {
     sub.type='button';
     sub.innerText = 'Login';
     sub.onclick = e =>{
-      Login(inPW.value, 'Login')
+      Login( inPW.value, 'Login')
     };
   }
 
@@ -54,7 +61,7 @@ function MakeLogin() {
     errorWraper = document.createElement('div');
     errorWraper.className = 'errorWraper';
   }
-  loginWraper.append(form);
+  inputWraper.append(form);
   loginWraper.append(errorWraper);
 }
 

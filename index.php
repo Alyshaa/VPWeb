@@ -17,6 +17,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 echo "Fehlende Kollegen:";
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
+$VPWebversion = file_get_contents('./docs/version.txt');
 echo"</br>";
 echo $fehlende_kollegen;
 echo '<table border="1">';
@@ -34,9 +35,10 @@ foreach ($pdo->query($sql) as $row) {
     echo "<td>". $row['fach'] . "</td>";
     echo "</tr>";
 }
-echo"</br>";
-echo '<a href="Editor.php">Vertretungsplan bearbeiten</a>';
+echo "<a>VPWeb-Version:$VPWebversion </a>";
+echo '</br>';
 
 ?>
+<a href="Editor.php">Vertretungsplan bearbeiten</a>
 </body>
 </html>

@@ -75,13 +75,14 @@ echo '<td></td>';
 echo '<td></td>';
 echo '<td><a href="New.php">Neuer Eintrag</a></td>';
 echo '</table>';
-        
+
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
 
 ?>
 <a>Fehlende Kollegen</a>
-<form>
-    <input type='textarea' id='fehlendekollegen' value='<?php echo $fehlende_kollegen; ?>'>
+<form action="php/KollegenSpeichern.php" method="get">
+    <input type='text' id='fehlendekollegen' name="Fehlendekollegen" value='<?php echo $fehlende_kollegen; ?>'>
+    <input type="Submit" value="Absenden" />
 </form>
 
 <br>

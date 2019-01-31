@@ -93,5 +93,14 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
     <input type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
     <button type='button' onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')" >speichern</button>
 </form>
+<?php
+$CurrentVPWebversion = file_get_contents('https://raw.githubusercontent.com/Informaten/VPWeb/master/docs/version.txt');
+$NeusteVPWebVersion= file_get_contents('./docs/version.txt');
+
+echo"Ihre VPWeb version ist: $CurrentVPWebversion </br>";
+echo"Die Neuste VPWeb version ist: $NeusteVPWebVersion";
+
+?>
+
 </body>
 </html>

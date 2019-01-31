@@ -18,7 +18,6 @@ session_start();
 
   echo "Fehlende Kollegen:";
   $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
-  $VPWebversion = file_get_contents('./docs/version.txt');
   echo"</br>";
   echo $fehlende_kollegen;
   echo '<table border="1">';
@@ -44,8 +43,6 @@ session_start();
   else {
     echo "<script src='js/NotLoggedin.js'></script>";
   }
-    echo "</br>";
-    echo "<a>VPWeb-Version: $VPWebversion </a>";
 ?>
 
 </body>

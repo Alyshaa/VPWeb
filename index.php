@@ -11,8 +11,6 @@
 <?php
 session_start();
 
-
-
   $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
   //$statement = $pdo->prepare("INSERT INTO plan (id, Klasse, Vertretung, xxx) VALUES (?, ?, ?, ?)");
@@ -32,22 +30,22 @@ session_start();
   $sql = "SELECT stunde, klasse, vertretung, fach FROM plan ORDER BY Klasse";
   foreach ($pdo->query($sql) as $row) {
       echo "<tr>";
-      echo "<td>". $row['stunde'] . "</td>";
-      echo "<td>". $row['klasse'] . "</td>";
-      echo "<td>". $row['vertretung'] . "</td>";
-      echo "<td>". $row['fach'] . "</td>";
+      echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
+      echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
+      echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
+      echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
       echo "</tr>";
   }
-  echo "<a>VPWeb-Version:$VPWebversion </a>";
   echo '</br>';
   echo '</table>';
   if(isset($_SESSION['loggedin'])){
     echo "<a href='editor.php'>Vertretungsplan bearbeiten</a>";
-
   }
   else {
     echo "<script src='js/NotLoggedin.js'></script>";
   }
+    echo "</br>";
+    echo "<a>VPWeb-Version: $VPWebversion </a>";
 ?>
 
 </body>

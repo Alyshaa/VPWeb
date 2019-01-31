@@ -45,10 +45,12 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 echo '<table border = "1">';
 echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
 echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
-echo '<d><a href="" style="text-decoration: none"> Klasse </a></td>';
+echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
 echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
+echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
 echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
-echo '<td> Hinzugefügt </td>';
+echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
+echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
 
 $sql = 'SELECT * FROM plan ORDER BY id';
                         //->fetchALL(PDO::FETCH_ASSOC)
@@ -58,8 +60,9 @@ foreach ($pdo->query($sql)as $row) {
     echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none" style="color: black">' . $row['anmerkung'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none" style="color: black" >' . $row['hinzugefuegt'] . '</a></td>';
+    echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
+    echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
+    echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
     echo '<td><a href="delete.php?id="'. $row['id']. '">Entfernen</a></td>';
     echo '</tr>';
 }
@@ -69,18 +72,18 @@ echo '<td></td>';
 echo '<td></td>';
 echo '<td></td>';
 echo '<td></td>';
+echo '<td></td>';
 echo '<td><a href="New.php">Neuer Eintrag</a></td>';
 echo '</table>';
+        
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
 
 ?>
-
 <a>Fehlende Kollegen</a>
-
-<form method='post'>
-    <input type='text' id='fehlendekollegen' value='<?php echo $fehlende_kollegen; ?>'>
-    <input type='submit' name='kspeichern' value='speichern' action='?submit'>
+<form>
+    <input type='textarea' id='fehlendekollegen' value='<?php echo $fehlende_kollegen; ?>'>
 </form>
+
 <br>
 <a>Passwort Ändern</a>
 <br>
@@ -89,22 +92,5 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
     <input type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
     <button type='button' onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')" >speichern</button>
 </form>
-
-<?php
-
-function kspeichern()
-{
-
-    $textfieldvlaue = $_GET['fehlendekollegen'];
-    file_put_contents("./docs/fehlendekollegen.txt",$textfieldvlaue );
-    echo $fehlendekollegen;
-    echo $textfieldvlaue;
-    echo 'Gespeichert';
-}
-if(isset($_POST['submit'])){
-    kspeichern();
-}
-?>
-
 </body>
 </html>

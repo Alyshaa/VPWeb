@@ -19,9 +19,9 @@
           })
         }).then(response=>response.text())
           .then(data=>{
-            //if (data == 'true') {
-              //window.location.replace('index.php');
-            //}
+           if (data == 'true') {
+             window.location.replace('index.php');
+           }
             console.log(data);
         });
 

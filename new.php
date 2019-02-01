@@ -16,7 +16,7 @@
                 <input type="text" name="vertretung" id="vertretung">
 	    </label>
 	    <label>Fach:
-                <input type="text" name="vertretung" id="vertretung">
+                <input type="text" name="fach" id="fach">
             </label>
             <label>Anmerkung:
                 <input type="text" name="anmerkung" id="anmerkung">

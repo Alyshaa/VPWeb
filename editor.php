@@ -40,7 +40,7 @@ if(!isset($_SESSION['loggedin'])){
   header('Location: index.php');
 
 }
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'Sc-91209078');
 
 echo '<table border = "1">';
 echo '<td><a href="" style="text-decoration: none"> ID </a></td>';

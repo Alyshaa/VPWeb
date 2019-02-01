@@ -4,7 +4,7 @@ if(!isset($_SESSION['loggedin'])){
     header('Location: ../index.php');
 
 }
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'Sc-91209078');
 
 $stunde = $_GET['stunde'];
 $klasse = $_GET['klasse'];

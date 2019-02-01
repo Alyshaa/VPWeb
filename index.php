@@ -11,7 +11,7 @@
 <?php
 session_start();
 
-  $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan','justin', 'Sc-91209078');
+  $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan','justin', 'BL<aj+V,$@9gbwQD');
 
   //$statement = $pdo->prepare("INSERT INTO plan (id, Klasse, Vertretung, xxx) VALUES (?, ?, ?, ?)");
   //$statement->execute(array('10', '20', '30', '40'));
@@ -41,7 +41,7 @@ session_start();
     echo "<a href='editor.php'>Vertretungsplan bearbeiten</a>";
   }
   else {
-    echo "<script src='js/NotLoggedin.js'></script>";
+    echo "<script src='js/NotLoggedIn.js'></script>";
   }
 ?>
 

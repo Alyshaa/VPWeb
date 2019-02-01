@@ -4,15 +4,23 @@ if(!isset($_SESSION['loggedin'])){
     header('Location: ../index.php');
 
 }
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'Sc-91209078');
-
+try{
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'BL<aj+V,$@9gbwQD');
+}catch(PDOExeption $th){
+echo $th->error_log;
+}
 $stunde = $_GET['stunde'];
 $klasse = $_GET['klasse'];
+$klasse = $_GET['fach'];
 $vertretung = $_GET['vertretung'];
 $anmerkung = $_GET['anmerkung'];
 
-$statement = $pdo->prepare("INSERT INTO plan (id, Stunde, Klasse, Vertretung, Anmerkung) VALUES (?, ?, ?, ?, ?)");
-$statement->execute(array('', $stunde, $klasse, $vertretung, $anmerkung,));
+$statement = $pdo->prepare('INSERT INTO plan ( stunde, klasse, vertretung, fach, anmerkung) VALUES (?, ?, ?, ?, ?)');
 
-header("Location: ../editor.php");
+$statement->execute(array( $stunde, $klasse, $vertretung, $fach, $anmerkung));
+
+
+//header("Location: ../editor.php");
+
 ?>
+

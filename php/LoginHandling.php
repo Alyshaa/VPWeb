@@ -7,7 +7,7 @@ if (isset($json['paswd'])) {
 
   if ($method == 'Login') {
 
-    if (password_verify($json['paswd'], substr(getPW(), 0, strlen(getPW())))) {
+    if (password_verify($json['paswd'], getPW())) {
 
       $_SESSION['loggedin'] = 'true';
       echo "true";
@@ -31,7 +31,7 @@ if (isset($json['paswd'])) {
 
 function kspeichern($value)
 {
-    file_put_contents("pw.txt", password_hash($value, PASSWORD_DEFAULT));
+    file_put_contents('pw.txt', password_hash($value, PASSWORD_DEFAULT));
 }
 function getPW()
 {

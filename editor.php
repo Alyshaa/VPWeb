@@ -19,9 +19,9 @@
           })
         }).then(response=>response.text())
           .then(data=>{
-            if (data == 'true') {
-              window.location.replace('index.php');
-            }
+            //if (data == 'true') {
+              //window.location.replace('index.php');
+            //}
             console.log(data);
         });
 
@@ -40,7 +40,7 @@ if(!isset($_SESSION['loggedin'])){
   header('Location: index.php');
 
 }
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'Sc-91209078');
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'justin', 'BL<aj+V,$@9gbwQD');
 
 echo '<table border = "1">';
 echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
@@ -73,7 +73,7 @@ echo '<td></td>';
 echo '<td></td>';
 echo '<td></td>';
 echo '<td></td>';
-echo '<td><a href="New.php">Neuer Eintrag</a></td>';
+echo '<td><a href="new.php">Neuer Eintrag</a></td>';
 echo '</table>';
 
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');

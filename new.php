@@ -11,8 +11,11 @@
             </label>
             <label>Klasse:
                 <input type="text" name="klasse" id="klasse">
-            </label>
+	    </label>
             <label>Vertretung:
+                <input type="text" name="vertretung" id="vertretung">
+	    </label>
+	    <label>Fach:
                 <input type="text" name="vertretung" id="vertretung">
             </label>
             <label>Anmerkung:

@@ -63,7 +63,7 @@ foreach ($pdo->query($sql)as $row) {
     echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
-    echo '<td><a href="delete.php?id="'. $row['id']. '">Entfernen</a></td>';
+    echo '<td><a href="delete.php?id=' .$row['id']. '">Entfernen</a></td>';
     echo '</tr>';
 }
 echo '<td></td>';

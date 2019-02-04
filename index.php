@@ -11,7 +11,7 @@
 <?php
 session_start();
 
-  $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan','justin', 'BL<aj+V,$@9gbwQD');
+  $pdo = new PDO('mysql:host=172.17.17.100;dbname=vertretungsplan','justin', 'BL<aj+V,$@9gbwQD');
 
   //$statement = $pdo->prepare("INSERT INTO plan (id, Klasse, Vertretung, xxx) VALUES (?, ?, ?, ?)");
   //$statement->execute(array('10', '20', '30', '40'));

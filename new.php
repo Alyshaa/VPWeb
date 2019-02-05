@@ -4,6 +4,10 @@
         <title>Neuer Eintrag</title>
     </head>
     <body>
+    </form>
+    <?php
+    $datum = $_GET['datum'];
+    ?>
     <form action="php/EintragSpeichern.php" method="get">
         <div>
             <label>Stunde:
@@ -21,9 +25,12 @@
             <label>Anmerkung:
                 <input type="text" name="anmerkung" id="anmerkung">
             </label>
-            <input type="submit"  name="submit"  value="speichern">
+            <label>Datum:
+                <input type="date" name="datum" id="datum" value="<?php echo $datum ?>">
+            </label>
+            <input type="submit"  name="submit" value="speichern">
         </div>
-    </form>
+
     </body>
 </html>
 

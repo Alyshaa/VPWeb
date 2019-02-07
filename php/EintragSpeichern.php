@@ -13,12 +13,6 @@ $vertretung = $_GET['vertretung'];
 $anmerkung = $_GET['anmerkung'];
 $datum = $_GET['datum'];
 
-echo $stunde;
-echo $klasse;
-echo $fach;
-echo $vertretung;
-echo $anmerkung;
-
 $statement = $pdo->prepare('INSERT INTO plan ( stunde, klasse, vertretung, fach, anmerkung, datum) VALUES (?, ?, ?, ?, ?, ?)');
 $statement->execute(array($stunde, $klasse, $vertretung, $fach, $anmerkung, $datum));
 

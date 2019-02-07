@@ -36,11 +36,12 @@
 <body>
 
 <?php
-//zu berechnende daten{
+//zu berechnende daten--->
 $morgen = strtotime("+1 day");
 $datummorgen = date("Ymd", $morgen);
-//}
+//<---
 ?>
+<a href="index.php"> zurück </a>
 <h1>Vertretungsplan Editor</h1>
 <a>Vertretungsplan für einen anderen Tag anzeigen</a>
 <form action="php/bestimmtertageditor.php" method="get">
@@ -62,6 +63,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 echo '<table border = "1">';
 echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
+echo '<td><a href="" style="text-decoration: none"> Datum </a></td>';
 echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
 echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
 echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
@@ -70,11 +72,12 @@ echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
 echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
 echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
 
-$sql = 'SELECT * FROM plan ORDER BY id';
+$sql = 'SELECT * FROM plan ORDER BY datum';
 //->fetchALL(PDO::FETCH_ASSOC)
 foreach ($pdo->query($sql) as $row) {
     echo '<tr>';
     echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
+    echo '<td><a href="" style="text-decoration: none">' . $row['datum'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
@@ -84,14 +87,14 @@ foreach ($pdo->query($sql) as $row) {
     echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
     echo '</tr>';
 }
-echo '<td></td>';
-echo '<td></td>';
-echo '<td></td>';
-echo '<td></td>';
-echo '<td></td>';
-echo '<td></td>';
-echo '<td></td>';
-echo '<td><a href="new.php">Neuer Eintrag</a></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td></td>';
+//echo '<td><a href="new.php">Neuer Eintrag</a></td>';
 echo '</table>';
 
 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
@@ -103,13 +106,6 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
     <input type="Submit" value="Absenden"/>
 </form>
 
-<a>Vertretungsplan für neuen Tag anlegen</a>
-<form action="php/bestimmtertageditor.php" method="get">
-    <input type="datum" id="neuerplandatum" name="datum" value="<?php echo "123456" ?>"/>
-    <input type="Submit" value="Absenden"/>
-</form>
-
-<br>
 <a>Passwort Ändern</a>
 <br>
 <form>
@@ -129,6 +125,10 @@ echo "Ihre VPWeb version ist: $CurrentVPWebversion </br>";
 echo "Die Neuste VPWeb version ist: $NeusteVPWebversion";
 
 ?>
+
+<form action="php/Logout.php">
+    <input class="loginbtn logoutbtn" type="submit" value="Logout">
+</form>
 
 </body>
 </html>

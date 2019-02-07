@@ -16,7 +16,7 @@ $datum = $_GET['datum'];
 $statement = $pdo->prepare('INSERT INTO plan ( stunde, klasse, vertretung, fach, anmerkung, datum) VALUES (?, ?, ?, ?, ?, ?)');
 $statement->execute(array($stunde, $klasse, $vertretung, $fach, $anmerkung, $datum));
 
-header("Location: ../editor.php");
+header("Location: ../editor.php?datum=" . $datum );
 
 ?>
 

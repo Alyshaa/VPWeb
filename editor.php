@@ -24,69 +24,110 @@
                         }
                         console.log(data);
                     });
-
             } else {
                 console.log('sdf');
             }
         }
-
-
     </script>
 </head>
 <body>
-
 <?php
-//zu berechnende daten--->
-$morgen = strtotime("+1 day");
-$datummorgen = date("Ymd", $morgen);
-//<---
-?>
-<a href="index.php"> zurück </a>
-<h1>Vertretungsplan Editor</h1>
-<a>Vertretungsplan für einen anderen Tag anzeigen</a>
-<form action="php/bestimmtertageditor.php" method="get">
-    <input type="date" id="planfuertag" name="datum" value="<?php echo $datummorgen ?>"/>
-    <input type="Submit" value="Absenden"/>
-</form>
-</br>
-
-<?php
-
-
 session_start();
 if (!isset($_SESSION['loggedin'])) {
     header('Location: index.php');
 
 }
+?>
 
+<?php
+//zu berechnende daten--->
+$morgen = strtotime("+1 day");
+$datummorgen = date("Y-m-d", $morgen);
+//<---
+?>
+<a href="index.php"> zurück </a>
+<h1>Vertretungsplan Editor</h1>
+<a>Vertretungsplan für einen anderen Tag anzeigen</a>
+<form action="editor.php" method="get">
+    <input type="date" id="planfuertag" name="datum" value="<?php if (isset($_GET['datum'])) {
+        $vpdatum = $_GET['datum'];
+        echo $vpdatum;
+    } else {
+        echo $datummorgen;
+    } ?>"/>
+    <input type="Submit" value="Absenden"/>
+</form>
+</br>
+
+<?php
 $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
-echo '<table border = "1">';
-echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
-echo '<td><a href="" style="text-decoration: none"> Datum </a></td>';
-echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
-echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
-echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
-echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
-echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
-echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
-echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
+if (isset($_GET['datum'])) {
+    $vpdatum = $_GET['datum'];
+    echo "<h2>Warnung Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
 
-$sql = 'SELECT * FROM plan ORDER BY datum';
+    echo '<table border = "1">';
+    echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
+
+    $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY id';
 //->fetchALL(PDO::FETCH_ASSOC)
-foreach ($pdo->query($sql) as $row) {
-    echo '<tr>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['datum'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
-    echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
-    echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
-    echo '</tr>';
-}
+    foreach ($pdo->query($sql) as $row) {
+        echo '<tr>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
+        echo '<td><a href="../delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+        echo '</tr>';
+    }
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td></td>';
+    echo '<td><a href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a></td>';
+    echo '</table>';
+
+} else {
+    echo "Alle Einträge werden angezeigt!";
+    echo '<table border = "1">';
+    echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Datum </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
+    echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
+
+    $sql = 'SELECT * FROM plan ORDER BY datum';
+//->fetchALL(PDO::FETCH_ASSOC)
+    foreach ($pdo->query($sql) as $row) {
+        echo '<tr>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['datum'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
+        echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
+        echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+        echo '</tr>';
+    }
 //echo '<td></td>';
 //echo '<td></td>';
 //echo '<td></td>';
@@ -95,16 +136,11 @@ foreach ($pdo->query($sql) as $row) {
 //echo '<td></td>';
 //echo '<td></td>';
 //echo '<td><a href="new.php">Neuer Eintrag</a></td>';
-echo '</table>';
-
-$fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
+    echo '</table>';
+    
+}
 
 ?>
-<a>Fehlende Kollegen</a>
-<form action="php/KollegenSpeichern.php" method="get">
-    <input type='text' id='fehlendekollegen' name="Fehlendekollegen" value='<?php echo $fehlende_kollegen; ?>'>
-    <input type="Submit" value="Absenden"/>
-</form>
 
 <a>Passwort Ändern</a>
 <br>
@@ -117,18 +153,8 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
     </button>
 </form>
 
-<?php
-$NeusteVPWebversion = file_get_contents('https://raw.githubusercontent.com/Informaten/VPWeb/master/docs/version.txt');
-$CurrentVPWebversion = file_get_contents('./docs/version.txt');
-
-echo "Ihre VPWeb version ist: $CurrentVPWebversion </br>";
-echo "Die Neuste VPWeb version ist: $NeusteVPWebversion";
-
-?>
-
 <form action="php/Logout.php">
     <input class="loginbtn logoutbtn" type="submit" value="Logout">
 </form>
-
 </body>
 </html>

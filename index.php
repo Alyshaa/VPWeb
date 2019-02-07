@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vertretungsplan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="css/design.css" rel="stylesheet">
 </head>
 <body>
+<main>
 <?php
 $heute = date('Y-m-d');
 $morgen = strtotime("+1 day");
@@ -34,18 +35,12 @@ if (isset($_GET['datum'])) {
     echo $fehlende_kollegen;
     echo '<table border="1">';
 
-    echo "<td> Stunde </td>";
-    echo "<td> Klasse </td>";
-    echo "<td> Vertretung </td>";
-    echo "<td> Fach </td>";
+    echo "<td href=\"\" style=\"text-decoration: none\"> Stunde </td>";
+    echo "<td href=\"\" style=\"text-decoration: none\"> Klasse </td>";
+    echo "<td href=\"\" style=\"text-decoration: none\"> Vertretung </td>";
+    echo "<td href=\"\" style=\"text-decoration: none\"> Fach </td>";
 
-    echo "</br>";
-    echo "Das ausgewählte Datum: ";
-    echo $vpdatum;
-    echo "</br>";
-    echo $datummorgen;
-
-    $sql = 'SELECT * FROM plan WHERE datum=' . $vpdatum . ' ORDER BY klasse';
+    $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
     foreach ($pdo->query($sql) as $row) {
         echo "<tr>";
         echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
@@ -56,9 +51,10 @@ if (isset($_GET['datum'])) {
     }
     echo '</br>';
     echo '</table>';
-    if (isset($_SESSION['loggedin'])) {
-        echo "<a href='editor.php'>Vertretungsplan bearbeiten</a>";
-    } else {
+    if(isset($_SESSION['loggedin'])){
+         echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
+    }
+    else {
         echo "<script src='js/NotLoggedIn.js'></script>";
     }
 
@@ -74,16 +70,8 @@ if (isset($_GET['datum'])) {
     echo "<td> Vertretung </td>";
     echo "<td> Fach </td>";
 
-    echo "</br>";
-    echo "Das Datum von heute: ";
-    echo $heute;
-    echo "</br>";
-    $heute = "2019-02-07";
-    $heute = date($heute);
-    echo $heute;
-    echo "</br>";
 
-    $sql = 'SELECT * FROM plan WHERE datum=' . $heute . ' ORDER BY klasse';
+    $sql = 'SELECT * FROM plan WHERE datum="' . $heute . '" ORDER BY klasse';
 
     foreach ($pdo->query($sql) as $row) {
         echo "<tr>";
@@ -97,7 +85,7 @@ if (isset($_GET['datum'])) {
     echo '</br>';
     echo '</table>';
     if(isset($_SESSION['loggedin'])){
-        // echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
+         echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
     }
     else {
         echo "<script src='js/NotLoggedIn.js'></script>";
@@ -105,5 +93,6 @@ if (isset($_GET['datum'])) {
 }
 ?>
 
+</main>
 </body>
 </html>

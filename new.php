@@ -9,8 +9,6 @@
     $datum = $_GET['datum'];
     ?>
     <main>
-    <h1>Eintrag hinzufügen</h1>
-    <article>
         <h1>Eintrag hinzufügen</h1>
         <article>
             <form action="php/EintragSpeichern.php" method="get">
@@ -36,9 +34,9 @@
                 <option>9</option>
                 <option>10</option>
             </select>
-            <input class="pos1 textfield" type="text" name="klasse" id="klasse">
-            <input class="pos1 textfield" type="text" name="vertretung" id="vertretung">
-            <input class="pos1 textfield" type="text" name="fach" id="fach">
+            <input class="pos1 textfield" type="text" name="klasse" id="klasse" maxlength="2">
+            <input class="pos1 textfield" type="text" name="vertretung" id="vertretung" maxlength="30">
+            <input class="pos1 textfield" type="text" name="fach" id="fach" maxlength="5">
             <input class="pos1 textfield" type="text" name="anmerkung" id="anmerkung">
             <input type="date" name="datum" id="datum" value="<?php echo $datum ?>">
             <input class="loginbtn spnbtn" type="submit" name="submit" value="speichern">

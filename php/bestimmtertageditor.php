@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<main>
 <h1>Vertretungsplan Editor</h1>
 
 <?php
@@ -14,6 +15,8 @@
 $morgen = strtotime("+1 day");
 $darummorgen = date("Ymd", $morgen);
 //}
+
+
 
 $vpdatum = $_GET['datum'];
 echo "<h2>Warnung Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
@@ -45,7 +48,7 @@ foreach ($pdo->query($sql) as $row) {
     echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
     echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
-    echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+    echo '<td><a href="../delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
     echo '</tr>';
 }
 echo '<td></td>';
@@ -66,6 +69,6 @@ $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen.txt');
     <input type='text' id='fehlendekollegen' name="Fehlendekollegen" value='<?php echo $fehlende_kollegen; ?>'>
     <input type="Submit" value="Absenden"/>
 </form>
-
+</main>
 </body>
 </html>

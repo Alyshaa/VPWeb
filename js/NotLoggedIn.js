@@ -85,7 +85,7 @@ function Login(password, operation) {
       }else if (data =='false') {
         var errorWraper = document.querySelector('.errorWraper');
           errorWraper.innerHTML = '';
-          errorWraper.append('Not right pw');
+          errorWraper.append('Passwort falsch');
         }
     console.log(data);
   })

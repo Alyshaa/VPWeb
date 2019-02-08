@@ -4,7 +4,7 @@ body {
 }
 
 main {
-    width: 935px;
+    width: 1020px;
     margin: 0 auto;
     background-color: white;
     padding: 20px;
@@ -16,13 +16,13 @@ main {
 }
 
 article {
-    width: 338px;
+    width: 358px;
     display: inline-block;
     text-align: right;
 }
 
 aside {
-    width: 581px;
+    width: 645px;
     display: inline-block;
     vertical-align: top;
     margin-left: 10px;
@@ -58,13 +58,13 @@ div {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 h1 {
     font-size: 30px;
-    margin: 10px;
-    margin-top: 0;
+    margin-bottom: 10px;
+    margin-left: 5px;
 }
 
 .spnbtn {
@@ -74,4 +74,9 @@ h1 {
 
 .selectop {
     text-align: center;
+}
+
+.abstand {
+    margin-top: 10px;
+    display: block;
 }

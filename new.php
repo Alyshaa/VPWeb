@@ -9,13 +9,13 @@
     $datum = $_GET['datum'];
     ?>
     <main>
-        <a class="loginbtn backbtn" href="editor.php?datum=<?php if (isset($_GET['datum'])) {
+        <a class="loginbtn" href="editor.php?datum=<?php if (isset($_GET['datum'])) {
             $vpdatum = $_GET['datum'];
             echo $vpdatum;
         } else {
             echo $datummorgen;
-        } ?> "> zurück </a><br><br>
-        <h1>Eintrag hinzufügen</h1>
+        } ?> "> zurück </a><br>
+        <h1 class="abstand">Eintrag hinzufügen</h1>
         <article>
             <form action="php/EintragSpeichern.php" method="get">
                 <div>
@@ -40,11 +40,11 @@
                 <option>8</option>
                 <option>9</option>
                 <option>10</option>
-            </select>
-            <input class="pos1 textfield" type="text" name="klasse" id="klasse" maxlength="2">
-            <input class="pos1 textfield" type="text" name="vertretung" id="vertretung" maxlength="30">
-            <input class="pos1 textfield" type="text" name="fach" id="fach" maxlength="5">
-            <input class="pos1 textfield" type="text" name="anmerkung" id="anmerkung">
+            </select><br>
+            <input class="pos1 textfield" type="text" name="klasse" id="klasse" maxlength="2"><br>
+            <input class="pos1 textfield" type="text" name="vertretung" id="vertretung" maxlength="30"><br>
+            <input class="pos1 textfield" type="text" name="fach" id="fach" maxlength="5"><br>
+            <input class="pos1 textfield" type="text" name="anmerkung" id="anmerkung"><br>
             <input class="pos1 textfield" type="date" name="datum" id="datum" value="<?php echo $datum ?>">
             <input class="loginbtn spnbtn" type="submit" name="submit" value="speichern">
             </form>

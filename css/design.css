@@ -50,7 +50,17 @@ table {
         background-color: #6769F1;
         color: white;
 
+
 }
+  .th {
+      text-decoration:none;
+      color:white;
+  }
+
+  .td {
+      text-decoration:none;
+      color: teal;
+  }
 
 form input {
     padding: 3px;

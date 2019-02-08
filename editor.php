@@ -70,7 +70,7 @@
         $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
 
         foreach ($pdo->query($sql) as $row) {
-            $zaehler + 1;
+            $zaehler += 1;
         }
 
         if ($zaehler == 0) {

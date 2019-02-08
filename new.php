@@ -9,6 +9,12 @@
     $datum = $_GET['datum'];
     ?>
     <main>
+        <a class="loginbtn backbtn" href="editor.php?datum=<?php if (isset($_GET['datum'])) {
+            $vpdatum = $_GET['datum'];
+            echo $vpdatum;
+        } else {
+            echo $datummorgen;
+        } ?> "> zurück </a><br><br>
         <h1>Eintrag hinzufügen</h1>
         <article>
             <form action="php/EintragSpeichern.php" method="get">

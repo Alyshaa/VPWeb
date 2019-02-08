@@ -17,7 +17,8 @@
                     <label>Klasse:</label><br><br>
                     <label>Vertretung:</label><br><br>
                     <label>Fach:</label><br><br>
-                    <label>Anmerkung:</label>
+                    <label>Anmerkung:</label><br><br>
+                    <label>Datum:</label>
                 </div>
         </article>
         <aside>
@@ -38,7 +39,7 @@
             <input class="pos1 textfield" type="text" name="vertretung" id="vertretung" maxlength="30">
             <input class="pos1 textfield" type="text" name="fach" id="fach" maxlength="5">
             <input class="pos1 textfield" type="text" name="anmerkung" id="anmerkung">
-            <input type="date" name="datum" id="datum" value="<?php echo $datum ?>">
+            <input class="pos1 textfield" type="date" name="datum" id="datum" value="<?php echo $datum ?>">
             <input class="loginbtn spnbtn" type="submit" name="submit" value="speichern">
             </form>
         </aside>
@@ -47,5 +48,3 @@
 
     </body>
 </html>
-
-

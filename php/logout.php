@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Logout</title>
-    <link href="css/design.css" rel="stylesheet">
+    <link href="../css/design.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -12,7 +12,7 @@
         echo "Logout erfolgreich!<br>";
         echo "Du wirst zur Startseite weitergeleitet!";
       ?>
-      <meta http-equiv='refresh' content='3; URL=index.php'>
+      <meta http-equiv='refresh' content='3; URL=../index.php'>
     </main>
   </body>
 </html>

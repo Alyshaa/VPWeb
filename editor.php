@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vertretungsplan Editor</title>
+    <link href="css/design.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
         function changePW(password, password2, operation) {
@@ -31,6 +32,7 @@
     </script>
 </head>
 <body>
+<main>
 <?php
 session_start();
 if (!isset($_SESSION['loggedin'])) {
@@ -45,17 +47,17 @@ $morgen = strtotime("+1 day");
 $datummorgen = date("Y-m-d", $morgen);
 //<---
 ?>
-<a href="index.php"> zurück </a>
+<a class="loginbtn backbtn" href="index.php"> zurück </a><br><br>
 <h1>Vertretungsplan Editor</h1>
-<a>Vertretungsplan für einen anderen Tag anzeigen</a>
+<a>Vertretungsplan für einen anderen Tag anzeigen</a><br><br>
 <form action="editor.php" method="get">
-    <input type="date" id="planfuertag" name="datum" value="<?php if (isset($_GET['datum'])) {
+    <input class='textfield' type="date" id="planfuertag" name="datum" value="<?php if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
         echo $vpdatum;
     } else {
         echo $datummorgen;
     } ?>"/>
-    <input type="Submit" value="Absenden"/>
+    <input class='loginbtn' type="Submit" value="Absenden"/>
 </form>
 </br>
 
@@ -64,30 +66,30 @@ $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
 if (isset($_GET['datum'])) {
     $vpdatum = $_GET['datum'];
-    echo "<h2>Warnung Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
+    echo "<h2>Warnung: Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
 
-    echo '<table border = "1">';
-    echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
+    echo '<table>';
+    echo '<th><a> ID </a></td>';
+    echo '<th><a> Stunde </a></td>';
+    echo '<th><a> Klasse </a></td>';
+    echo '<th><a> Vertretung </a></td>';
+    echo '<th><a> Fach <a></td>';
+    echo '<th><a> Anmerkung <a></td>';
+    echo '<th><a> Hinzugefügt <a></td>';
+    echo '<th><a> Aktion <a></td>';
 
     $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY id';
 //->fetchALL(PDO::FETCH_ASSOC)
     foreach ($pdo->query($sql) as $row) {
         echo '<tr>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
-        echo '<td><a href="../delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+        echo '<td><a>' . $row['id'] . '</a></td>';
+        echo '<td><a>' . $row['stunde'] . '</a></td>';
+        echo '<td><a>' . $row['klasse'] . '</a></td>';
+        echo '<td><a>' . $row['vertretung'] . '</a></td>';
+        echo '<td><a>' . $row['fach'] . '</a></td>';
+        echo '<td><a>' . $row['anmerkung'] . '</a></td>';
+        echo '<td><a>' . $row['hinzugefuegt'] . '</a></td>';
+        echo '<tD><a class="aktion" href="../delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
         echo '</tr>';
     }
     echo '<td></td>';
@@ -97,35 +99,35 @@ if (isset($_GET['datum'])) {
     echo '<td></td>';
     echo '<td></td>';
     echo '<td></td>';
-    echo '<td><a href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a></td>';
+    echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a></td>';
     echo '</table>';
 
 } else {
-    echo "Alle Einträge werden angezeigt!";
-    echo '<table border = "1">';
-    echo '<td><a href="" style="text-decoration: none"> ID </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Datum </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Stunde </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Klasse </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Vertretung </a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Fach <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Anmerkung <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Hinzugefügt <a></td>';
-    echo '<td><a href="" style="text-decoration: none"> Aktion <a></td>';
+    echo "<a class='abstand'>Alle Einträge werden angezeigt!</a>";
+    echo '<table>';
+    echo '<th><a> ID </a></td>';
+    echo '<th><a> Datum </a></td>';
+    echo '<th><a> Stunde </a></td>';
+    echo '<th><a> Klasse </a></td>';
+    echo '<th><a> Vertretung </a></td>';
+    echo '<th><a> Fach <a></td>';
+    echo '<th><a> Anmerkung <a></td>';
+    echo '<th><a> Hinzugefügt <a></td>';
+    echo '<th><a> Aktion <a></td>';
 
     $sql = 'SELECT * FROM plan ORDER BY datum';
 //->fetchALL(PDO::FETCH_ASSOC)
     foreach ($pdo->query($sql) as $row) {
         echo '<tr>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['id'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['datum'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['stunde'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['klasse'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['vertretung'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['fach'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['anmerkung'] . '</a></td>';
-        echo '<td><a href="" style="text-decoration: none">' . $row['hinzugefuegt'] . '</a></td>';
-        echo '<td><a href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+        echo '<td><a>' . $row['id'] . '</a></td>';
+        echo '<td><a>' . $row['datum'] . '</a></td>';
+        echo '<td><a>' . $row['stunde'] . '</a></td>';
+        echo '<td><a>' . $row['klasse'] . '</a></td>';
+        echo '<td><a>' . $row['vertretung'] . '</a></td>';
+        echo '<td><a>' . $row['fach'] . '</a></td>';
+        echo '<td><a>' . $row['anmerkung'] . '</a></td>';
+        echo '<td><a>' . $row['hinzugefuegt'] . '</a></td>';
+        echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
         echo '</tr>';
     }
 //echo '<td></td>';
@@ -137,24 +139,21 @@ if (isset($_GET['datum'])) {
 //echo '<td></td>';
 //echo '<td><a href="new.php">Neuer Eintrag</a></td>';
     echo '</table>';
-    
+
 }
 
 ?>
-
-<a>Passwort Ändern</a>
 <br>
+<a id='pwabstand'>Passwort Ändern</a>
 <form>
-    <input type='password' id='cpw' value='' placeholder="Passwort">
-    <input type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
-    <button type='button'
-            onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')">
-        speichern
-    </button>
+    <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort">
+    <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
+    <button class='loginbtn'type='button' onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')" >speichern</button>
 </form>
-
+<br>
 <form action="php/Logout.php">
     <input class="loginbtn logoutbtn" type="submit" value="Logout">
 </form>
+</main>
 </body>
 </html>

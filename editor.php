@@ -57,92 +57,95 @@
         <input class='loginbtn' type="Submit" value="Absenden"/>
     </form>
     </br>
-
     <?php
     $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
-        echo "<h2>Warnung: Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
+        echo "<h2>Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
         $zaehler = 0;
         $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
+
+        if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")){ // gucke ob eine datei für fehelbde kollegen für den tag existiert
+            $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
+            echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen ."</a>";
+        } else {
+            file_put_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt', "");
+
+        }       // wen nicht wird sie schoneinmal erstellt um keine fehlermeldungen anzuzeigen
+
         foreach ($pdo->query($sql) as $row) {
             $zaehler += 1;
         }
         if ($zaehler == 0) {
-            echo "<a href=''style='text-decoration:none'> Es gibt keinen vertretungsplan für diesen Tag.</a>";
+            echo "<a href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
+            echo "<br>";
+            echo "<a class='aktion' href='./new.php?datum='" . $vpdatum . "'>Neuer Eintrag</a>";
         } else {
-              echo '<table>';
-              echo '<th><a class="th" href=""> ID </a></th>';
-              echo '<th><a class="th" href=""> Datum </a></th>';
-              echo '<th><a class="th" href=""> Stunde </a></th>';
-              echo '<th><a class="th" href=""> Klasse </a></th>';
-              echo '<th><a class="th" href=""> Vertretung </a></th>';
-              echo '<th><a class="th" href=""> Fach </a></th>';
-              echo '<th><a class="th" href=""> Anmerkung </a></th>';
-              echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
-              echo '<th><a class="th" href=""> Aktion </a></th>';
+            echo '<table>';
+            echo '<th><a class="th" href=""> ID </a></th>';
+            echo '<th><a class="th" href=""> Datum </a></th>';
+            echo '<th><a class="th" href=""> Stunde </a></th>';
+            echo '<th><a class="th" href=""> Klasse </a></th>';
+            echo '<th><a class="th" href=""> Vertretung </a></th>';
+            echo '<th><a class="th" href=""> Fach </a></th>';
+            echo '<th><a class="th" href=""> Anmerkung </a></th>';
+            echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
+            echo '<th><a class="th" href=""> Aktion </a></th>';
             $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY id';
 //->fetchALL(PDO::FETCH_ASSOC)
             foreach ($pdo->query($sql) as $row) {
-              echo '<tr>';
-              echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
-              echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
-              echo '</tr>';
+                echo '<tr>';
+                echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
+                echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+                echo '</tr>';
             }
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td></td>';
-              echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a></td>';
-              echo '</table>';
-        }
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td></td>';
+            echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">Drucken</a> </td>';
+            echo '</table>';
 
-          } else {
-              echo "<a class='abstand'>Alle Einträge werden angezeigt!</a>";
-              echo '<table>';
-              echo '<th><a class="th" href=""> ID </a></th>';
-              echo '<th><a class="th" href=""> Datum </a></th>';
-              echo '<th><a class="th" href=""> Stunde </a></th>';
-              echo '<th><a class="th" href=""> Klasse </a></th>';
-              echo '<th><a class="th" href=""> Vertretung </a></th>';
-              echo '<th><a class="th" href=""> Fach </a></th>';
-              echo '<th><a class="th" href=""> Anmerkung </a></th>';
-              echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
-              echo '<th><a class="th" href=""> Aktion </a></th>';
+        }
+    } else {
+        echo "<a class='abstand'>Alle Einträge werden angezeigt!</a>";
+        echo '<table>';
+        echo '<th><a class="th" href=""> ID </a></th>';
+        echo '<th><a class="th" href=""> Datum </a></th>';
+        echo '<th><a class="th" href=""> Stunde </a></th>';
+        echo '<th><a class="th" href=""> Klasse </a></th>';
+        echo '<th><a class="th" href=""> Vertretung </a></th>';
+        echo '<th><a class="th" href=""> Fach </a></th>';
+        echo '<th><a class="th" href=""> Anmerkung </a></th>';
+        echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
+        echo '<th><a class="th" href=""> Aktion </a></th>';
         $sql = 'SELECT * FROM plan ORDER BY datum';
 //->fetchALL(PDO::FETCH_ASSOC)
         foreach ($pdo->query($sql) as $row) {
-              echo '<tr>';
-              echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
-              echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
-              echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
-              echo '</tr>';
+            echo '<tr>';
+            echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
+            echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+            echo '</tr>';
         }
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td></td>';
-//echo '<td><a href="new.php">Neuer Eintrag</a></td>';
         echo '</table>';
     }
     ?>

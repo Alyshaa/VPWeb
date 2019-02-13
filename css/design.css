@@ -15,6 +15,7 @@ main {
     color: teal;
     font-family: inherit;
 }
+
 .loginbtn {
     background-color: #6769F1;
     border: none;
@@ -29,38 +30,45 @@ main {
 }
 
 .logoutbtn {
-  position: relative;
-  left: 45.5%;
+    position: relative;
+    left: 45.5%;
+}
+
+.druckbtn {
+    position: right;
 }
 
 table {
-        border-collapse: collapse;
-        width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-    th, td {
-        text-align: left;
-        padding: 8px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+th, td {
+    text-align: left;
+    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-    tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
 
-    th {
-        background-color: #6769F1;
-        color: white;
+th {
+    background-color: #6769F1;
+    color: white;
 
 
 }
-  .th {
-      text-decoration:none;
-      color:white;
-  }
 
-  .td {
-      text-decoration:none;
-      color: teal;
-  }
+.th {
+    text-decoration: none;
+    color: white;
+}
+
+.td {
+    text-decoration: none;
+    color: teal;
+}
 
 form input {
     padding: 3px;
@@ -91,6 +99,7 @@ h2 {
 .eingaben {
     margin-top: 5px;
 }
+
 .abstand {
     margin-bottom: 5px;
     display: block;
@@ -107,15 +116,23 @@ h2 {
     vertical-align: middle;
 }
 
+.textfield2 {
+    width: 25%;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
 input[type=date].textfield {
-  padding: 5px 10px;
+    padding: 5px 10px;
 }
 
 .backbtn {
-  float: left;
+    float: left;
 }
 
 #pwabstand {
-  margin-bottom: 5px;
-  display: block;
+    margin-bottom: 5px;
+    display: block;
 }

@@ -62,13 +62,18 @@
 
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
+        if (isset($_GET['Fehlendekollegen'])) {
+            $fk = $_GET['Fehlendekollegen'];
+            file_put_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt', $fk);
+        }
+
         echo "<h2>Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
         $zaehler = 0;
         $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
 
-        if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")){ // gucke ob eine datei für fehelbde kollegen für den tag existiert
+        if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")) { // gucke ob eine datei für fehelbde kollegen für den tag existiert
             $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
-            echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen ."</a>";
+            echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen . "</a>";
         } else {
             file_put_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt', "");
 
@@ -80,7 +85,7 @@
         if ($zaehler == 0) {
             echo "<a href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
             echo "<br>";
-            echo "<a class='aktion' href='./new.php?datum='" . $vpdatum . "'>Neuer Eintrag</a>";
+            echo '<a class="aktion" href="./new.php?datum="' . $vpdatum . '">Neuer Eintrag</a>';
         } else {
             echo '<table>';
             echo '<th><a class="th" href=""> ID </a></th>';
@@ -118,6 +123,11 @@
             echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">Drucken</a> </td>';
             echo '</table>';
 
+            echo '<a>Fehlende Kollegen</a>';
+            echo '<form action="./php/KollegenSpeichern.php?datum="'.$vpdatum.'" method="get">';
+            echo '<input type="text" id="fehlendekollegen" name="Fehlendekollegen" value="' . $fehlende_kollegen . '"">';
+            echo '<input type="Submit" value="Absenden"/>';
+            echo '</form>';
         }
     } else {
         echo "<a class='abstand'>Alle Einträge werden angezeigt!</a>";
@@ -150,6 +160,7 @@
     }
     ?>
     <br>
+
     <a id='pwabstand'>Passwort Ändern</a>
     <form>
         <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort">

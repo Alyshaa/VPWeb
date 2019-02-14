@@ -35,9 +35,9 @@
         if ($zaehler == 0) {
             echo "<a href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
         } else {
-            if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")){ // gucke ob eine datei für fehelbde kollegen für den tag existiert
+            if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")) { // gucke ob eine datei für fehelbde kollegen für den tag existiert
                 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
-                echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen ."</a>";
+                echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen . "</a>";
             }
 
             echo '<table>';
@@ -57,11 +57,11 @@
             echo '</table>';
             echo '</br>';
         }
-        echo '<form action="drucken.php" method="get">';
+        echo '<form action="drucken.php?datum="'.$datum .'" method="get">';
         echo '<input class="textfield2" visible="false" type="text" name="datum" id="datum" value="' . $vpdatum . '">';
         echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
         echo '</form>';
-        
+
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
         } else {
@@ -100,8 +100,8 @@
         }
 
         echo '<form action="drucken.php" method="get">';
-            echo '<input class="textfield2" visible="false" type="text" name="datum" id="datum" value="' . $heute . '">';
-            echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
+        echo '<input height="0" visible="false" type="text" name="datum" id="datum" value="' . $heute . '">';
+        echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
         echo '</form>';
 
         if (isset($_SESSION['loggedin'])) {

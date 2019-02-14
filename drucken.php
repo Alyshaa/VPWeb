@@ -1,3 +1,8 @@
+<?php
+require '../vendor/autoload.php';
+use Dompdf\Dompdf;
+
+$html = <<< HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +15,10 @@
 <body>
 <main>
     <h1>Vertretungsplan</h1>
-    <?php
+HTML;
     $heute = date('Y-m-d');
     $morgen = strtotime("+1 day");
     $datummorgen = date("Y-m-d", $morgen);
-    ?>
-    <?php
     $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
@@ -26,39 +29,54 @@
             $zaehler += 1;
         }
         if ($zaehler == 0) {
-            echo "<a> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
+            $html .= "<a> Es gibt keinen Vertretungsplan für diesen Tag.</a>".PHP_EOL;
             header("Location: ../index.php?datum=" . $vpdatum);
         } else {
             $vpdatumconvert = date("d.m.Y", strtotime($vpdatumconvert));
-            echo 'Vertretungsplan vom: ' . $vpdatumconvert .'';
+            $html .= 'Vertretungsplan vom: ' . $vpdatumconvert .'';
 
             if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")){ // gucke ob eine datei für fehelbde kollegen für den tag existiert
                 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
-                echo "<a class='abstand'>Fehlende Kollegen: " . $fehlende_kollegen ."</a>";
+                $html .= "<a class='abstand'>Fehlende Kollegen: " . $fehlende_kollegen ."</a>".PHP_EOL;
             }else{
-                echo $vpdatum . ".txt";
+                $html .= $vpdatum . ".txt";
             }       // wen nicht wird nichts angezeigt
 
-            echo '<table>';
-            echo '<th><a class="th"> Stunde </th>';
-            echo '<th><a class="th"> Klasse </th>';
-            echo '<th><a class="th"> Vertretung </th>';
-            echo '<th><a class="th"> Fach </th>';
+            $html .= '<table>'.PHP_EOL;
+			$html .= "<tr>".PHP_EOL;
+            $html .= '<th><a class="th"> Stunde </th>'.PHP_EOL;
+            $html .= '<th><a class="th"> Klasse </th>'.PHP_EOL;
+            $html .= '<th><a class="th"> Vertretung </th>'.PHP_EOL;
+            $html .= '<th><a class="th"> Fach </th>'.PHP_EOL;
+			$html .= "</tr>".PHP_EOL;
             $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
             foreach ($pdo->query($sql) as $row) {
-                echo "<tr>";
-                echo '<td><a class="td">' . $row['stunde'] . '</a></td>';
-                echo '<td><a class="td">' . $row['klasse'] . '</a></td>';
-                echo '<td><a class="td">' . $row['vertretung'] . '</a></td>';
-                echo '<td><a class="td">' . $row['fach'] . '</a></td>';
-                echo "</tr>";
+                $html .= "<tr>".PHP_EOL;
+                $html .= '<td><a class="td">' . (empty($row['stunde']) ? "&nbsp;" : $row['stunde']) . '</a></td>'.PHP_EOL;
+                $html .= '<td><a class="td">' . (empty($row['klasse']) ? "&nbsp;" : $row['klasse']) . '</a></td>'.PHP_EOL;
+                $html .= '<td><a class="td">' . (empty($row['vertretung']) ? "&nbsp;" : $row['vertretung']) . '</a></td>'.PHP_EOL;
+                $html .= '<td><a class="td">' . (empty($row['fach']) ? "&nbsp;" : $row['fach']) . '</a></td>'.PHP_EOL;
+                $html .= "</tr>".PHP_EOL;
             }
-            echo '</table>';
-            echo '</br>';
+            $html .= '</table>'.PHP_EOL;
         }
     } else {
-        echo "Ich Benötige ein datum um dir eine PDF erstellen zu können. Bitte versuche es erneut!";
+        $html .= "Ich Benötige ein datum um dir eine PDF erstellen zu können. Bitte versuche es erneut!";
     }
-    ?>
+$html .= <<< HTML
 </body>
 </html>
+HTML;
+// instantiate and use the dompdf class
+$dompdf = new Dompdf();
+$dompdf->loadHtml($html);
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream();
+?>

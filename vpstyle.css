@@ -1,0 +1,30 @@
+* {
+	font-family: Helvetica;
+}
+#header {
+	margin-top: 2em;
+}
+h2 {
+	margin: 0;
+	display: inline-block;
+}
+#date {
+	float: right;
+}
+table {
+	width: 100%;
+	text-align: left;
+	border-spacing: 0;
+	border: 1px solid black;
+}
+th, td {
+	border: 1px solid lightgrey;
+	padding: 5px;
+}
+th {
+	background: lightgrey;
+}
+hr {
+	border: 1px solid black;
+	margin: 0 0 40px;
+}

@@ -6,30 +6,6 @@
     <title>Vertretungsplan Editor</title>
     <link href="css/design.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript">
-        function changePW(password, password2, operation) {
-            if (password === password2) {
-                fetch('php/LoginHandling.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        paswd: password,
-                        operation: operation
-                    })
-                }).then(response => response.text())
-                    .then(data => {
-                        if (data == 'true') {
-                            window.location.replace('index.php');
-                        }
-                        console.log(data);
-                    });
-            } else {
-                console.log('sdf');
-            }
-        }
-    </script>
 </head>
 <body>
 <main>
@@ -46,7 +22,7 @@
     <!-- <a class="loginbtn backbtn" href="index.php"> zurück </a><br><br> -->
 
     <h1>Vertretungsplan Editor</h1>
-    <a href="" style="text-decoration:none">Vertretungsplan für einen anderen Tag anzeigen</a><br><br>
+    <a href="" style="text-decoration:none">Vertretungsplan auswhälen</a><br><br>
     <form action="editor.php" method="get">
         <input class='textfield' type="date" id="planfuertag" name="datum" value="<?php if (isset($_GET['datum'])) {
             $vpdatum = $_GET['datum'];
@@ -108,9 +84,9 @@
                 echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
                 //echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
                 //echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
-                echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
+                echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '&datum=' . $vpdatum . '">Entfernen</a></td>';
                 echo '</tr>';
-            }
+            }   
             echo '<tr>'; //Neuer Eintrag
             echo '<form action="php/EintragSpeichern.php" method="get">';
             echo '<td><input type="text" id="Stunde" name="stunde" value="" maxlength="2"></td>';
@@ -143,50 +119,14 @@
             echo '</form>';
         }
     } else {
-        echo "<a class='abstand'>Alle Einträge werden angezeigt!</a>";
-        echo '<table>';
-        echo '<th><a class="th" href=""> ID </a></th>';
-        echo '<th><a class="th" href=""> Datum </a></th>';
-        echo '<th><a class="th" href=""> Stunde </a></th>';
-        echo '<th><a class="th" href=""> Klasse </a></th>';
-        echo '<th><a class="th" href=""> Vertretung </a></th>';
-        echo '<th><a class="th" href=""> Fach </a></th>';
-        echo '<th><a class="th" href=""> Anmerkung </a></th>';
-        echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
-        echo '<th><a class="th" href=""> Aktion </a></th>';
-        $sql = 'SELECT * FROM plan ORDER BY datum';
-//->fetchALL(PDO::FETCH_ASSOC)
-        foreach ($pdo->query($sql) as $row) {
-            $eintragDatum = $row['datum'];
-            $eintragDatumconvertiert = date("d.m.Y", strtotime($eintragDatum));
-            echo '<tr>';
-            echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $eintragDatumconvertiert . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
-            echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
-            echo '</tr>';
-        }
-        echo '</table>';
+        echo'<a>Bitte Datum auswählen</a>';
     }
     ?>
-    <br>
-    <a id='pwabstand'>Passwort Ändern</a>
-    <form>
-        <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort" readonly>
-        <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen" readonly>
-        <button class='loginbtn' type='button'
-                onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')">
-            speichern
-        </button>
-    </form>
-    <br>
     <form action="php/logout.php">
         <button class="loginbtn logoutbtn" type="submit" value="Logout">Logout</button>
+    </form>
+    <form action="einstellungen.php">
+        <button class="loginbtn logoutbtn" type="submit" value="einstellungen">Einstellungen</button>
     </form>
 </main>
 </body>

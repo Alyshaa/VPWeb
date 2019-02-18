@@ -18,7 +18,7 @@
     <a>Vertretungsplan für einen anderen Tag anzeigen</a><br><br>
     <form action="index.php" method="get">
         <input class='textfield' type="date" name="datum" id="datum" value="<?php echo $datummorgen ?>">
-        <input class='loginbtn' type="Submit" value="OK"/>
+    <button class='loginbtn' type="Submit" value="OK">OK</button>
     </form>
     </br>
     <?php
@@ -39,7 +39,6 @@
                 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
                 echo "<a class='abstand' href=''style='text-decoration:none'>Fehlende Kollegen: " . $fehlende_kollegen . "</a>";
             }
-
             echo '<table>';
             echo '<th><a class="th" href=""> Stunde </th>';
             echo '<th><a class="th" href=""> Klasse </th>';
@@ -56,10 +55,8 @@
             }
             echo '</table>';
             echo '</br>';
+            echo '<a href="drucken.php?datum='. $vpdatum .'">PDF Download</a>';
         }
-
-        echo '<a href="drucken.php?datum='. $vpdatum .'">PDF</a>';
-
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
         } else {
@@ -94,12 +91,9 @@
             }
             echo '</table>';
             echo '</br>';
+            echo'<br/>';
+            echo '<a href="drucken.php?datum='. $vpdatum .'">PDF Dwonload</a>';
         }
-        echo '<form action="drucken.php" method="get">';
-        echo '<input height="0" visible="false" type="text" name="datum" id="datum" value="' . $heute . '">';
-        echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
-        echo '</form>';
-
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
         } else {

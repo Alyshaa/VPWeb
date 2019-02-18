@@ -30,6 +30,7 @@ $datum = $_GET['datum'];
     <aside>
         <select class="pos1 textfield" type="text" name="stunde" id="stunde" list="stunde2">
             <option value="" hidden>Stunde auswählen:</option>
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>

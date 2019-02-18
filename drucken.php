@@ -11,7 +11,7 @@ $html = <<< HTML
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vertretungsplan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="vpstyle.css" rel="stylesheet">
+    <link href="css/vpstyle.css" rel="stylesheet">
 </head>
 <body>
 <main>

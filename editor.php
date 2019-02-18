@@ -54,7 +54,7 @@
         } else {
             echo $datummorgen;
         } ?>"/>
-        <input class='loginbtn' type="Submit" value="Absenden"/>
+        <button class='loginbtn' type="Submit" value="Absenden">Absenden</button>
     </form>
     </br>
     <?php
@@ -86,16 +86,15 @@
         if ($zaehler == 0) {
             echo "<a href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
             echo "<br>";
-            echo '<a class="aktion" href="./new.php?datum="' . $vpdatum . '">Neuer Eintrag</a>';
+            echo '<a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a>';
         } else {
             echo '<table>';
-            echo '<th><a class="th" href=""> Datum </a></th>';
             echo '<th><a class="th" href=""> Stunde </a></th>';
             echo '<th><a class="th" href=""> Klasse </a></th>';
             echo '<th><a class="th" href=""> Vertretung </a></th>';
             echo '<th><a class="th" href=""> Fach </a></th>';
-            echo '<th><a class="th" href=""> Anmerkung </a></th>';
-            echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
+            //echo '<th><a class="th" href=""> Anmerkung </a></th>';
+            //echo '<th><a class="th" href=""> Hinzugefügt </a></th>';
             echo '<th><a class="th" href=""> Aktion </a></th>';
             $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY id';
 //->fetchALL(PDO::FETCH_ASSOC)
@@ -103,30 +102,44 @@
                 $eintragDatum = $row['datum'];
                 $eintragDatumconvertiert = date("d.m.Y", strtotime($eintragDatum));
                 echo '<tr>';
-                echo '<td><a class="td" href="">' . $eintragDatumconvertiert . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
-                echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
-                echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
+                //echo '<td><a class="td" href="">' . $row['anmerkung'] . '</a></td>';
+                //echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
                 echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '">Entfernen</a></td>';
                 echo '</tr>';
             }
+            echo '<tr>'; //Neuer Eintrag
+            echo '<form action="php/EintragSpeichern.php" method="get">';
+            echo '<td><input type="text" id="Stunde" name="stunde" value="" maxlength="2"></td>';
+            echo '<td><input type="text" id="Klasse" name="klasse" value="" maxlength="3"></td>';
+            echo '<td><input type="text" id="vertretung" name="vertretung" value="" maxlength="15"></td>';
+            echo '<td><input type="text" id="fach" name="fach" value="" maxlength="10" ></td>';
+            //echo '<td><input type="text" id="anmerkung" name="anmerkung" value=""></td>';
+           // echo '<td></td>';
+            echo '<td><button class="loginbtn spnbtn" type="submit" name="datum" value="' . $vpdatum . '">Speichern</button></td>';
+            echo '</form>';
+            echo '</tr>';
+            echo '<tr>';
             echo '<td></td>';
             echo '<td></td>';
             echo '<td></td>';
             echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td></td>';
-            echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">PDF</a> </td>';
+           // echo '<td></td>';
+           // echo '<td></td>';
+            echo '<td>';
+           // echo '<a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <br>';
+            echo '<a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">PDF Download</a>';
+            echo '</td>';
+            echo '</tr>';
             echo '</table>';
 
             echo '<a>Fehlende Kollegen</a>';
-            echo '<form action="./php/KollegenSpeichern.php?datum="'.$vpdatum.'" method="get">';
-            echo '<input type="text" id="fehlendekollegen" name="Fehlendekollegen" value="' . $fehlende_kollegen . '"">';
-            echo '<input type="Submit" value="Absenden"/>';
+            echo '<form action="./php/KollegenSpeichern.php" method="get">';
+            echo '<textarea rows="4" cols="50" name="Fehlendekollegen">'.$fehlende_kollegen.'</textarea><br>';
+            echo '<button class="loginbtn spnbtn" type="submit" name="datum" value="' . $vpdatum . '">Speichern</button>';
             echo '</form>';
         }
     } else {
@@ -144,9 +157,11 @@
         $sql = 'SELECT * FROM plan ORDER BY datum';
 //->fetchALL(PDO::FETCH_ASSOC)
         foreach ($pdo->query($sql) as $row) {
+            $eintragDatum = $row['datum'];
+            $eintragDatumconvertiert = date("d.m.Y", strtotime($eintragDatum));
             echo '<tr>';
             echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
-            echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
+            echo '<td><a class="td" href="">' . $eintragDatumconvertiert . '</a></td>';
             echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
             echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
             echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
@@ -160,11 +175,10 @@
     }
     ?>
     <br>
-
     <a id='pwabstand'>Passwort Ändern</a>
     <form>
-        <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort">
-        <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen">
+        <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort" readonly>
+        <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen" readonly>
         <button class='loginbtn' type='button'
                 onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')">
             speichern
@@ -172,7 +186,7 @@
     </form>
     <br>
     <form action="php/logout.php">
-        <input class="loginbtn logoutbtn" type="submit" value="Logout">
+        <button class="loginbtn logoutbtn" type="submit" value="Logout">Logout</button>
     </form>
 </main>
 </body>

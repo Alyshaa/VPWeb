@@ -29,6 +29,6 @@ hr {
 	border: 1px solid black;
 	margin: 2px 0 40px;
 }
-td:not(:nth-child(3)) {
+th:not(:nth-child(3)) {
 	width: 10%;
 }

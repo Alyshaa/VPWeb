@@ -66,8 +66,9 @@
             $fk = $_GET['Fehlendekollegen'];
             file_put_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt', $fk);
         }
-
-        echo "<h2>Sie bearbeiten den Vertretungsplan für den: " . $vpdatum . "</h2>";
+        $vpdatumconvert = $vpdatum;
+        $vpdatumconvert = date("d.m.Y", strtotime($vpdatumconvert));
+        echo "<h2>Sie bearbeiten den Vertretungsplan für den: " . $vpdatumconvert . "</h2>";
         $zaehler = 0;
         $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY klasse';
 
@@ -88,7 +89,6 @@
             echo '<a class="aktion" href="./new.php?datum="' . $vpdatum . '">Neuer Eintrag</a>';
         } else {
             echo '<table>';
-            echo '<th><a class="th" href=""> ID </a></th>';
             echo '<th><a class="th" href=""> Datum </a></th>';
             echo '<th><a class="th" href=""> Stunde </a></th>';
             echo '<th><a class="th" href=""> Klasse </a></th>';
@@ -100,9 +100,10 @@
             $sql = 'SELECT * FROM plan WHERE datum="' . $vpdatum . '" ORDER BY id';
 //->fetchALL(PDO::FETCH_ASSOC)
             foreach ($pdo->query($sql) as $row) {
+                $eintragDatum = $row['datum'];
+                $eintragDatumconvertiert = date("d.m.Y", strtotime($eintragDatum));
                 echo '<tr>';
-                echo '<td><a class="td" href="">' . $row['id'] . '</a></td>';
-                echo '<td><a class="td" href="">' . $row['datum'] . '</a></td>';
+                echo '<td><a class="td" href="">' . $eintragDatumconvertiert . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['stunde'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['klasse'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
@@ -119,8 +120,7 @@
             echo '<td></td>';
             echo '<td></td>';
             echo '<td></td>';
-            echo '<td></td>';
-            echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">Drucken</a> </td>';
+            echo '<td><a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">PDF</a> </td>';
             echo '</table>';
 
             echo '<a>Fehlende Kollegen</a>';
@@ -171,7 +171,7 @@
         </button>
     </form>
     <br>
-    <form action="php/Logout.php">
+    <form action="php/logout.php">
         <input class="loginbtn logoutbtn" type="submit" value="Logout">
     </form>
 </main>

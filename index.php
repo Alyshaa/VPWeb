@@ -57,10 +57,8 @@
             echo '</table>';
             echo '</br>';
         }
-        echo '<form action="drucken.php?datum="'.$datum .'" method="get">';
-        echo '<input class="textfield2" visible="false" type="text" name="datum" id="datum" value="' . $vpdatum . '">';
-        echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
-        echo '</form>';
+
+        echo '<a href="drucken.php?datum='. $vpdatum .'">PDF</a>';
 
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
@@ -93,12 +91,10 @@
                 echo '<td><a class="td" href="">' . $row['vertretung'] . '</a></td>';
                 echo '<td><a class="td" href="">' . $row['fach'] . '</a></td>';
                 echo "</tr>";
-
             }
             echo '</table>';
             echo '</br>';
         }
-
         echo '<form action="drucken.php" method="get">';
         echo '<input height="0" visible="false" type="text" name="datum" id="datum" value="' . $heute . '">';
         echo '<input class="druckbtn" type="Submit" value="Drucken"/>';
@@ -111,7 +107,6 @@
         }
     }
     ?>
-
 </main>
 </body>
 </html>

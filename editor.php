@@ -30,11 +30,13 @@
         } else {
             echo $datummorgen;
         } ?>"/>
-        <button class='loginbtn' type="Submit" value="Absenden">Absenden</button>
+        <button class='loginbtn' type="Submit" value="Absenden">Öffnen</button>
     </form>
     </br>
     <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+
+    include 'config/dbConnection.php';
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
 
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
@@ -86,7 +88,7 @@
                 //echo '<td><a class="td" href="">' . $row['hinzugefuegt'] . '</a></td>';
                 echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '&datum=' . $vpdatum . '">Entfernen</a></td>';
                 echo '</tr>';
-            }   
+            }
             echo '<tr>'; //Neuer Eintrag
             echo '<form action="php/EintragSpeichern.php" method="get">';
             echo '<td><input type="text" id="Stunde" name="stunde" value="" maxlength="2"></td>';
@@ -94,7 +96,7 @@
             echo '<td><input type="text" id="vertretung" name="vertretung" value="" maxlength="15"></td>';
             echo '<td><input type="text" id="fach" name="fach" value="" maxlength="10" ></td>';
             //echo '<td><input type="text" id="anmerkung" name="anmerkung" value=""></td>';
-           // echo '<td></td>';
+            // echo '<td></td>';
             echo '<td><button class="loginbtn spnbtn" type="submit" name="datum" value="' . $vpdatum . '">Speichern</button></td>';
             echo '</form>';
             echo '</tr>';
@@ -103,10 +105,10 @@
             echo '<td></td>';
             echo '<td></td>';
             echo '<td></td>';
-           // echo '<td></td>';
-           // echo '<td></td>';
+            // echo '<td></td>';
+            // echo '<td></td>';
             echo '<td>';
-           // echo '<a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <br>';
+            // echo '<a class="aktion" href="./new.php?datum=' . $vpdatum . '">Neuer Eintrag</a> <br>';
             echo '<a class="aktion" href="./drucken.php?datum=' . $vpdatum . '">PDF Download</a>';
             echo '</td>';
             echo '</tr>';
@@ -114,17 +116,21 @@
 
             echo '<a>Fehlende Kollegen</a>';
             echo '<form action="./php/KollegenSpeichern.php" method="get">';
-            echo '<textarea rows="4" cols="50" name="Fehlendekollegen">'.$fehlende_kollegen.'</textarea><br>';
+            echo '<textarea rows="4" cols="50" name="Fehlendekollegen">' . $fehlende_kollegen . '</textarea><br>';
             echo '<button class="loginbtn spnbtn" type="submit" name="datum" value="' . $vpdatum . '">Speichern</button>';
             echo '</form>';
         }
     } else {
-        echo'<a>Bitte Datum auswählen</a>';
+        echo '<a>Willkommen im VPWeb Editor</a> <br>';
+        echo '<a>Um einen Vertretungsplan zu bearbeiten müssen sie zuerst ein datum auswählen</a><br>';
+        echo '<a></a>';
+
     }
     ?>
     <form action="php/logout.php">
         <button class="loginbtn logoutbtn" type="submit" value="Logout">Logout</button>
     </form>
+    <br>
     <form action="einstellungen.php">
         <button class="loginbtn logoutbtn" type="submit" value="einstellungen">Einstellungen</button>
     </form>

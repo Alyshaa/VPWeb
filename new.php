@@ -1,8 +1,8 @@
-    <?php
-    session_start();
-    if (!isset($_SESSION['loggedin'])) {
-        header('Location: index.php');
-    }
+<?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -15,12 +15,12 @@
 $datum = $_GET['datum'];
 ?>
 <main>
-        <a class="loginbtn" href="editor.php?datum=<?php if (isset($_GET['datum'])) {
-            $vpdatum = $_GET['datum'];
-            echo $vpdatum;
-        } else {
-            echo $datummorgen;
-        } ?> "> zurück </a><br>
+    <a class="loginbtn" href="editor.php?datum=<?php if (isset($_GET['datum'])) {
+        $vpdatum = $_GET['datum'];
+        echo $vpdatum;
+    } else {
+        echo $datummorgen;
+    } ?> "> zurück </a><br>
     <h1 class="abstand">Eintrag hinzufügen</h1>
     <article>
         <form action="php/EintragSpeichern.php" method="get">

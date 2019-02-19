@@ -4,7 +4,9 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: index.php');
 
 }
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+include './config/dbConnection.php';
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
+
 $id = $_GET['id'];
 $datum = $_GET['datum'];
 

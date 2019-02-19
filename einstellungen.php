@@ -1,9 +1,9 @@
-    <?php
-    session_start();
-    if (!isset($_SESSION['loggedin'])) {
-        header('Location: index.php');
-    }
-    ?>
+<?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.php');
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -35,19 +35,19 @@
     </script>
 </head>
 <body>
-    <main>
+<main>
     <h1>Einstellungen</h1>
-        <br>
+    <br>
 
-        <h2>Passwort ändern</h2>
-        <form>
-            <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort" readonly>
-            <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen" readonly>
-            <button class='loginbtn' type='button'
-                    onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')">
-                speichern
-            </button>
-        </form>
-    </main>
+    <h2>Passwort ändern</h2>
+    <form>
+        <input class="eingabe textfield" type='password' id='cpw' value='' placeholder="Passwort" readonly>
+        <input class="textfield" type='password' id='cpw2' value='' placeholder="Passwort Wiederholen" readonly>
+        <button class='loginbtn' type='button'
+                onclick="changePW(document.querySelector('#cpw').value, document.querySelector('#cpw2').value, 'changePW')">
+            speichern
+        </button>
+    </form>
+</main>
 </body>
 </html>

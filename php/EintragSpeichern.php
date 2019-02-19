@@ -4,7 +4,8 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: ../index.php');
 }
 
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+include '../config/dbConnection.php';
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
 
 $stunde = $_GET['stunde'];
 $klasse = $_GET['klasse'];
@@ -16,7 +17,7 @@ $datum = $_GET['datum'];
 $statement = $pdo->prepare('INSERT INTO plan ( stunde, klasse, vertretung, fach, anmerkung, datum) VALUES (?, ?, ?, ?, ?, ?)');
 $statement->execute(array($stunde, $klasse, $vertretung, $fach, $anmerkung, $datum));
 
-header("Location: ../editor.php?datum=" . $datum );
+header("Location: ../editor.php?datum=" . $datum);
 
 ?>
 

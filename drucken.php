@@ -35,20 +35,20 @@ if (isset($_GET['datum'])) {
     } else {
         $vpdatumconvert = date("d.m.Y", strtotime($vpdatumconvert));
 
-        $html .='<div id="header">';
-        $html .='<h2>Vertretungsplan</h2>';
-        $html .='<h2 id="date"><a>' . $vpdatumconvert . '</a></h2>';
-        $html .='</div>';
-        $html .='<hr />';
+        $html .= '<div id="header">';
+        $html .= '<h2>Vertretungsplan</h2>';
+        $html .= '<h2 id="date"><a>' . $vpdatumconvert . '</a></h2>';
+        $html .= '</div>';
+        $html .= '<hr />';
 
         if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")) { // gucke ob eine datei für fehelbde kollegen für den tag existiert
             $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
 
-            $html .="<main>";
-			$html .="<h2>Fehlende Kollegen: $fehlende_kollegen </h2>";
-		    $html .="</main>";
+            $html .= "<main>";
+            $html .= "<h2>Fehlende Kollegen: $fehlende_kollegen </h2>";
+            $html .= "</main>";
 
-            } else {
+        } else {
             $html .= $vpdatum . ".txt";
         }       // wen nicht wird nichts angezeigt
 

@@ -17,14 +17,21 @@
     ?>
     <a>Vertretungsplan für einen anderen Tag anzeigen</a><br><br>
     <form action="index.php" method="get">
-        <input class='textfield' type="date" name="datum" id="datum" value="<?php echo $datummorgen ?>">
-    <button class='loginbtn' type="Submit" value="OK">OK</button>
+        <input class='textfield' type="date" name="datum" id="datum" value="<?php if (isset($_GET['datum'])) {
+            $vpdatum = $_GET['datum'];
+            echo $vpdatum;
+        } else {
+            echo $datummorgen;
+        } ?>">
+        <button class='loginbtn' type="Submit" value="OK">OK</button>
     </form>
     </br>
     <?php
     session_start();
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
 
+    include '/config/dbConnection.php';
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
+    
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];
         $zaehler = 0;
@@ -55,7 +62,7 @@
             }
             echo '</table>';
             echo '</br>';
-            echo '<a href="drucken.php?datum='. $vpdatum .'">PDF Download</a>';
+            echo '<a href="drucken.php?datum=' . $vpdatum . '">PDF Download</a>';
         }
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
@@ -91,8 +98,8 @@
             }
             echo '</table>';
             echo '</br>';
-            echo'<br/>';
-            echo '<a href="drucken.php?datum='. $vpdatum .'">PDF Dwonload</a>';
+            echo '<br/>';
+            echo '<a href="drucken.php?datum=' . $vpdatum . '">PDF Dwonload</a>';
         }
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";

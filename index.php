@@ -29,8 +29,7 @@
     <?php
     session_start();
 
-    include '/config/dbConnection.php';
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
     
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];

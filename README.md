@@ -6,6 +6,8 @@ Das Ziel dieses Projektes ist ein Barrierefreihen Vertretungsplan für Schulen z
 
 Anzeigen von Vertretungstunden
 
+Drucken von Vertretungsplänen
+
 Passwortgeschützter Editor
 
 Kinderleichtes bedienen des Editors

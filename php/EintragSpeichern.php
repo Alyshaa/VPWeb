@@ -3,9 +3,8 @@ session_start();
 if (!isset($_SESSION['loggedin'])) {
     header('Location: ../index.php');
 }
-
-include '../config/dbConnection.php';
-$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
+$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+//$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
 
 $stunde = $_GET['stunde'];
 $klasse = $_GET['klasse'];

@@ -35,8 +35,8 @@
     </br>
     <?php
 
-    include 'config/dbConnection.php';
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', $dbUser, $dbUserPassword );
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+    //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
 
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];

@@ -14,7 +14,6 @@ Kinderleichtes bedienen des Editors
 
 Kinderleichtes Erstellen und Löschen von Einträgen
 
-Informationen zu Einträgen wie Erstellungszeit/datum und Anmerkungen.
 
 Die gesamte Oberfläche ist Barrierefrei und mit jedem Browser und Screenreader verwendbar. (Programme/treiber für Braillzeilen sind leider nicht mit jedem Browser nutzbar dazu werden die informationen noch ergäntzt)
 

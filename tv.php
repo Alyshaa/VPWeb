@@ -76,13 +76,6 @@
                 echo "</tr>";
             }
             echo '</table>';
-            echo '</br>';
-            echo '<a href="drucken.php?datum=' . $vpdatum . '">PDF Download</a>';
-        }
-        if (isset($_SESSION['loggedin'])) {
-            echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";
-        } else {
-            echo "<script src='js/NotLoggedIn.js'></script>";
         }
     } else { //ANZEIGEN WENN KEIN DATUM AUSGEWÄHLT WURDE
         $vpdatum = $heute;

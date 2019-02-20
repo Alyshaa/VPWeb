@@ -18,9 +18,14 @@ if (isset($json['paswd'])) {
     }
 
   }elseif ($method == 'changePW'){
-    unset($_SESSION['loggedin']);
-    kspeichern($json['paswd']);
-    echo "true";
+    if (password_verify($json['oldpw'], getPW())) {
+
+      unset($_SESSION['loggedin']);
+      kspeichern($json['paswd']);
+      echo "true";
+    }else{
+      echo "oldpw";
+    }
 
   }
 

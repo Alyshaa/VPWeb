@@ -11,6 +11,8 @@
 <main>
     <h1>Vertretungsplan</h1>
     <?php
+    session_start();
+
     $heute = date('Y-m-d');
     $morgen = strtotime("+1 day");
     $datummorgen = date("Y-m-d", $morgen);
@@ -25,9 +27,8 @@
         } ?>">
         <button class='loginbtn' type="Submit" value="OK">OK</button>
     </form>
-    </br>
+    <br/>
     <?php
-    session_start();
 
     $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
     //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
@@ -40,7 +41,7 @@
             $zaehler += 1;
         }
         if ($zaehler == 0) {
-            echo "<a href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
+            echo "<a href='' style='text-decoration:none'> Es gibt keinen Vertretungsplan für diesen Tag.</a>";
         } else {
             if (file_exists("./docs/fehlendekollegen/" . $vpdatum . ".txt")) { // gucke ob eine datei für fehelbde kollegen für den tag existiert
                 $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
@@ -77,11 +78,11 @@
             $zaehler += 1;
         }
         if ($zaehler == 0) {
-            echo "<a id='Error' href=''style='text-decoration:none'> Es gibt keinen Vertretungsplan für heute.</a>";
+            echo '<a id="Error" href="" style="text-decoration:none"> Es gibt keinen Vertretungsplan für heute.</a>';
         } else {
-            echo "<a class='abstand' href=\"\"style=\"text-decoration:none\">Fehlende Kollegen:</a>";
+            echo '<a class="abstand" href="" style="text-decoration:none">Fehlende Kollegen:</a>';
             $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $heute . '.txt');
-            echo "<a class='abstand' href=\"\"style=\"text-decoration:none\">$fehlende_kollegen</a>";
+            echo '<a class="abstand" href="" style="text-decoration:none\">$fehlende_kollegen</a>';
             echo '<table>';
             echo '<th><a class="th" href=""> Stunde </th>';
             echo '<th><a class="th" href=""> Klasse </th>';

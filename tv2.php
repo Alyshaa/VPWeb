@@ -97,7 +97,7 @@ if (isset($_GET['datum'])) {
         $html .= '</table>' . PHP_EOL;
     }
 } else {
-    $html .= "Ich Benötige ein datum um dir eine PDF erstellen zu können. Bitte versuche es erneut!";
+    $html .= "Fehler: Kein vertretungsplan gefunden! ErrorCode:     ";
 }
 $html .= <<< HTML
 </body>

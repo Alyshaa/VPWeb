@@ -36,10 +36,10 @@
     </br>
     <?php
 
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
-    //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
+    //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
 
-    if (isset($_GET['datum'])) {
+    if (isset($_GET['datum'])) { //Gucke ob man einen bestimmten vertretungsplan sehen möchte
         $vpdatum = $_GET['datum'];
 
         if (isset($_GET['Fehlendekollegen'])) {
@@ -114,7 +114,6 @@
                         echo '<td><a class="aktion" href="delete.php?id=' . $row['id'] . '&datum=' . $vpdatum . '">Entfernen</a>';
                         echo '<br><a class="aktion" href="editor.php?id=' . $row['id'] . '&datum=' . $vpdatum . '&edit=true">Bearbeiten</a>';
                         echo '</td>';
-
                                                                                                                             //<br><a class="aktion" href="editor.php?id=' . 
                         echo '</tr>';
                     }

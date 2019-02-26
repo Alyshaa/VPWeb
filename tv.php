@@ -80,8 +80,8 @@
     <?php
     session_start();
 
-    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
-    //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
+    //$pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=vertretungsplan', 'vpweb', '3052cNs3?qRu@5G');
 
     if (isset($_GET['datum'])) {
         $vpdatum = $_GET['datum'];

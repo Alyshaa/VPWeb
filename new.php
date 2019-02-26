@@ -1,15 +1,15 @@
-<?php
-session_start();
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: index.php');
-}
-?>
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>Neuer Eintrag</title>
     <link href="css/designnew.css" rel="stylesheet">
 </head>
+<?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.php');
+}
+?>
 <body>
 <?php
 $datum = $_GET['datum'];

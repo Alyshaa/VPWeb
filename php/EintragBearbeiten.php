@@ -10,12 +10,11 @@ $stunde = $_GET['stunde'];
 $klasse = $_GET['klasse'];
 $fach = $_GET['fach'];
 $vertretung = $_GET['vertretung'];
-$anmerkung = $_GET['anmerkung'];
 $datum = $_GET['datum'];
+$id = $_GET['id'];
 
-$statement = $pdo->prepare('INSERT INTO plan ( stunde, klasse, vertretung, fach, anmerkung, datum) VALUES (?, ?, ?, ?, ?, ?)');
-$statement->execute(array($stunde, $klasse, $vertretung, $fach, $anmerkung, $datum));
+$statement = $pdo->prepare('UPDATE INTO plan ( stunde, klasse, vertretung, fach WHERE id=$id) VALUES (?, ?, ?, ?, ?, ?)');
+$statement->execute(array($stunde, $klasse, $vertretung, $fach, $datum , $id));
 
 header("Location: ../editor.php?datum=" . $datum);
 ?>
-

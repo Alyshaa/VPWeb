@@ -99,7 +99,7 @@
             echo '</table>';
             echo '</br>';
             echo '<br/>';
-            echo '<a href="drucken.php?datum=' . $vpdatum . '">PDF Dwonload</a>';
+            echo '<a href="drucken.php?datum=' . $vpdatum . '">PDF Download</a>';
         }
         if (isset($_SESSION['loggedin'])) {
             echo "<meta http-equiv='refresh' content='0; URL=editor.php'>";

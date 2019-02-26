@@ -7,29 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/design.css" rel="stylesheet">
 
+<!--    <script>-->
+<!--        onbeforeunload = function () {-->
+<!--            window.scrollTo(0, 0);-->
+<!--        }-->
+<!--        onload = e=>{-->
+<!--            var d = document.documentElement;-->
+<!--            var offset = d.scrollTop + window.innerHeight;-->
+<!--            var height = d.offsetHeight;-->
+<!---->
+<!--            if (offset >= height) {-->
+<!--                setTimeout(function () {-->
+<!--                    location.reload(1);-->
+<!--                }, 5000);-->
+<!---->
+<!--            }-->
+<!--          setInterval(function(){-->
+<!--              scrollBy(0,100);-->
+<!--          }, 5000);-->
+<!--        };-->
+<!--        onscroll = function() {-->
+<!--            var d = document.documentElement;-->
+<!--            var offset = d.scrollTop + window.innerHeight;-->
+<!--            var height = d.offsetHeight;-->
+<!---->
+<!--            if (offset >= height) {-->
+<!--                setTimeout(function () {-->
+<!--                    location.reload(1);-->
+<!--                }, 5000);-->
+<!---->
+<!--            }-->
+<!--        };-->
+<!--    </script>-->
+
+
 
     <script>
-        onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        }
-        onload = e=>{
+        function autoScrollandReload(scrollDistance,pause){
 
-          setInterval(function(){
-              scrollBy(0,100);
-          }, 5000);
+            var interval = setInterval(function(){
+
+                var scrolled = window.pageYOffset;
+                var scroll_size = document.body.scrollHeight;
+                var scroll_remaining = scroll_size-scrolled;;
+
+                if(scroll_remaining <= window.innerHeight){
+                    clearInterval(interval);
+
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                    setTimeout(location.reload(),500);
+
+                }else{
+                    window.scrollBy(0,scrollDistance);
+                };
+
+            },pause);
+
         };
-        onscroll = function() {
-            var d = document.documentElement;
-            var offset = d.scrollTop + window.innerHeight;
-            var height = d.offsetHeight;
 
-            if (offset >= height) {
-                setTimeout(function () {
-                    location.reload(1);
-                }, 5000);
-
-            }
-        };
+        autoScrollandReload(100,2000);
     </script>
 
 </head>

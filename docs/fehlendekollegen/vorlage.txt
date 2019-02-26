@@ -1,0 +1,12 @@
+<!-- derzeit muss man leider noch mit HTML arbeiten um mehr als nur Fehlende Kollegen Richtig anzuzeigen anzeigen zu können -->
+<!-- Tragen sie am betsen die Texte in den makierten bereichen ein -->
+
+<!-- Fehlende Kollegen Anfang -->
+
+<!-- Fehlende Kollegen Ende -->
+<br><br>
+<!-- Weitere Informationen Anfang -->
+
+<!-- Weitere Informationen Ende -->
+<!-- "<br>" Für Zeilenumbrüche -->
+<!-- Weitere formatierungs möglichkeiten einfach im internet suchen -->

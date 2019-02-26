@@ -48,7 +48,7 @@ if (isset($_GET['datum'])) {
             $fehlende_kollegen = file_get_contents('./docs/fehlendekollegen/' . $vpdatum . '.txt');
 
             $html .= "<main>";
-            $html .= "<h2>Fehlende Kollegen: $fehlende_kollegen </h2>";
+            $html .= "<h2>Fehlende Kollegen: ". $fehlende_kollegen ."</h2>";
             $html .= "</main>";
 
         } else {

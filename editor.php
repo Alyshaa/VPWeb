@@ -23,7 +23,7 @@
     <a class="loginbtn backbtn" href="tv.php?datum=<?php echo $_GET['datum']; ?>"> Im TV Modus ansehen </a><br><br>
 
     <h1>Vertretungsplan Editor</h1>
-    <a href="" style="text-decoration:none">Vertretungsplan auswhälen</a><br><br>
+    <a href="" style="text-decoration:none">Vertretungsplan auswählen</a><br><br>
     <form action="editor.php" method="get">
         <input class='textfield' type="date" id="planfuertag" name="datum" value="<?php if (isset($_GET['datum'])) {
             $vpdatum = $_GET['datum'];
